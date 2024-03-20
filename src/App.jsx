@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Header from './components/Header'
-import Content from './components/Content'
+import Employees from './components/Employees'
 import Footer from './components/Footer'
 
 
@@ -17,7 +17,7 @@ function App() {
   return (
     <>
       <Header/>
-      <Content/>
+      <Employees/>
       <Footer/>
     </>
   )
