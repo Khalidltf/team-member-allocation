@@ -3,6 +3,7 @@ import maleProfile from "../assets/maleProfile.jpeg";
 import femaleProfile from "../assets/femaleProfile.jpeg";
 
 const Employees = () => {
+  const [selectedTeam, setTeam] = useState("TeamB");
   const [employees, setEmployees] = useState([
     {
       id: 1,
@@ -90,12 +91,31 @@ const Employees = () => {
     },
   ]);
 
+  const handleTeamSelectionChange = ({ target }) => setTeam(target.value);
+  const handleEmployeeCardClick = (e) => {
+    const transformedEmployees = employees.map((employee) => {
+      employee.id === parseInt(e.currentTarget.id)
+        ? employee.teamName === selectedTeam
+          ? { ...employee, teamName: "" }
+          : { ...employee, teamName: selectedTeam }
+        : employee;
+    });
+
+    setEmployees(transformedEmployees);
+  };
+
   return (
     <main className="container">
       {/* dropdown */}
       <div className="row  justify-content-center mt-3 mb-3">
         <div className="col-6">
-          <select name="team" id="team" className="form-select form-select-lg">
+          <select
+            name="team"
+            id="team"
+            className="form-select form-select-lg"
+            value={selectedTeam}
+            onChange={handleTeamSelectionChange}
+          >
             <option value="TeamA">TeamA</option>
             <option value="TeamB">TeamB</option>
             <option value="TeamC">TeamC</option>
@@ -112,8 +132,13 @@ const Employees = () => {
               <div
                 key={employee.id}
                 id={employee.id}
-                className="card m-2"
+                className={
+                  employee.teamName === selectedTeam
+                    ? "card m-2 standout"
+                    : "card m-2"
+                }
                 style={{ cursor: "pointer" }}
+                onClick={handleEmployeeCardClick}
               >
                 {employee.gender === "male" ? (
                   <img
