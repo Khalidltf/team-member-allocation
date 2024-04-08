@@ -1,9 +1,10 @@
 const Footer = () => {
+  const today = new Date();
   return (
     <footer className="container">
       <div className="row justify-content-center mt-3 mb-4 ">
-        <div className="col-8 ">
-          <h1>Footer</h1>
+        <div className="col-8">
+          <h5>Team member allocation {today.getFullYear()}</h5>
         </div>
       </div>
     </footer>
