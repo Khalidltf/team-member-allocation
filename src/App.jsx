@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Nav from "./components/Nav";
 import Header from "./components/Header";
 import Employees from "./components/Employees";
 import Footer from "./components/Footer";
+import NotFound from "./components/NotFound";
+import GroupedTeamMembers from "./components/GroupedTeamMembers";
 
 // Import our custom CSS
 import "./scss/styles.scss";
@@ -16,7 +20,7 @@ function App() {
     JSON.parse(localStorage.getItem("selectedTeam")) || "TeamB"
   );
   const [employees, setEmployees] = useState(
-    JSON.parse(localStorage.getItem('employees')) || [
+    JSON.parse(localStorage.getItem("employees")) || [
       {
         id: 1,
         fullName: "Bob Jones",
@@ -126,7 +130,8 @@ function App() {
   };
 
   return (
-    <>
+    <Router>
+      <Nav />
       <Header
         selectedTeam={selectedTeam}
         teamMemberCount={
@@ -134,15 +139,33 @@ function App() {
             .length
         }
       />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Employees
+              employees={employees}
+              selectedTeam={selectedTeam}
+              handleTeamSelectionChange={handleTeamSelectionChange}
+              handleEmployeeCardClick={handleEmployeeCardClick}
+            />
+          }
+        ></Route>
+        <Route
+          path="/GroupedTeamMembers"
+          element={
+            <GroupedTeamMembers
+              employee={employees}
+              selectedTeam={selectedTeam}
+              setTeam={setTeam}
+            />
+          }
+        ></Route>
+        <Route path="*" element={<NotFound />}></Route>
+      </Routes>
 
-      <Employees
-        employees={employees}
-        selectedTeam={selectedTeam}
-        handleTeamSelectionChange={handleTeamSelectionChange}
-        handleEmployeeCardClick={handleEmployeeCardClick}
-      />
       <Footer />
-    </>
+    </Router>
   );
 }
 
