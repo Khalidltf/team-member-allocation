@@ -155,7 +155,7 @@ function App() {
           path="/GroupedTeamMembers"
           element={
             <GroupedTeamMembers
-              employee={employees}
+              employees={employees}
               selectedTeam={selectedTeam}
               setTeam={setTeam}
             />
