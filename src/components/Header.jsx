@@ -8,7 +8,7 @@ const Header = ({ selectedTeam, teamMemberCount }) => {
           </h1>
           <h3>
             {selectedTeam} has {teamMemberCount}{" "}
-            {teamMemberCount > 0 ? "Members" : "Member"}
+            {teamMemberCount === 1 ? "Member" : "Members"}
           </h3>
         </div>
       </div>
