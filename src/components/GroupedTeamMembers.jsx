@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import DataContext from "../context/DataContext";
 
-const GroupedTeamMembers = ({ employees, selectedTeam, setTeam }) => {
+const GroupedTeamMembers = () => {
+  const { employees, selectedTeam, setTeam } = useContext(DataContext);
   const [groupedEmployees, setGroupedData] = useState(groupTeamMembers());
 
   function groupTeamMembers() {
@@ -42,10 +44,10 @@ const GroupedTeamMembers = ({ employees, selectedTeam, setTeam }) => {
   }
 
   function handleTeamClick(event) {
-    let transformedGroupData = groupedEmployees.map((groupdeData) =>
-      groupdeData.team === event.currentTarget.id
-        ? { ...groupdeData, collapsed: !groupdeData.collapsed }
-        : groupdeData
+    let transformedGroupData = groupedEmployees.map((groupedData) =>
+      groupedData.team === event.currentTarget.id
+        ? { ...groupedData, collapsed: !groupedData.collapsed }
+        : groupedData
     );
 
     setGroupedData(transformedGroupData);
@@ -74,7 +76,7 @@ const GroupedTeamMembers = ({ employees, selectedTeam, setTeam }) => {
             >
               {item.members.map((member) => {
                 return (
-                  <div className="mt-2">
+                  <div key={member.id} className="mt-2">
                     <h5 className="card-title mt-2">
                       <span className="text-dark">
                         Full name: {member.fullName}

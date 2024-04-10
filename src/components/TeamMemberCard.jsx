@@ -1,11 +1,12 @@
+/* eslint-disable react/prop-types */
 import maleProfile from "../assets/maleProfile.jpeg";
 import femaleProfile from "../assets/femaleProfile.jpeg";
+import { useContext } from "react";
+import DataContext from "../context/DataContext";
 
-export default function TeamMemberCard({
-  employee,
-  selectedTeam,
-  handleEmployeeCardClick,
-}) {
+export default function TeamMemberCard({ employee }) {
+  const { selectedTeam, handleEmployeeCardClick } = useContext(DataContext);
+
   return (
     <div
       key={employee.id}
