@@ -2,6 +2,7 @@
 import maleProfile from "../assets/maleProfile.jpeg";
 import femaleProfile from "../assets/femaleProfile.jpeg";
 import { useContext } from "react";
+import PropTypes from 'prop-types';
 import DataContext from "../context/DataContext";
 
 export default function TeamMemberCard({ employee }) {
@@ -36,3 +37,8 @@ export default function TeamMemberCard({ employee }) {
     </div>
   );
 }
+
+
+TeamMemberCard.propTypes = {
+  employee: PropTypes.array.isRequired
+};
